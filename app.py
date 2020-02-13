@@ -28,7 +28,8 @@ def callback(fileevent):
             if os.path.exists("../mp3/" + j['artistName'].replace('/', "／") + "_" +j['albumName'].replace('/', "／") + "/" + j['songName'] + ".mp3"):
                 print("file already exists")
                 return
-            os.makedirs("../mp3/" + j['artistName'].replace('/', "／") + "_" +j['albumName'].replace('/', "／")) 
+            if not os.path.exists("../mp3/" + j['artistName'].replace('/', "／") + "_" +j['albumName'].replace('/', "／")):
+                os.makedirs("../mp3/" + j['artistName'].replace('/', "／") + "_" +j['albumName'].replace('/', "／")) 
             res = requests.get(j['musicurl'])
             f = open("../mp3/" + j['artistName'].replace('/', "／") + "_" +j['albumName'].replace('/', "／")+ "/" + j['songName'] + ".mp3", 'wb')
             for chunk in res.iter_content(100000):
